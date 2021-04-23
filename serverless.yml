@@ -1,0 +1,29 @@
+service: aws-edu-enem-api
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: python3.8
+  lambdaHashingVersion: 20201221
+  region: us-east-1
+  ecr:
+    images:
+      dashboard_service:
+        path: ./services/dashboard_service
+        file: Dockerfile
+      questions_service:
+        path: ./services/questions_service
+        file: Dockerfile
+
+functions:
+  getQSEmbeddingURL:
+    image:
+      name: dashboard_service
+      command:
+        - getQSEmbeddingURL.handler
+  getEnemQuestions:
+    image:
+      name: questions_service
+      command:
+        - getEnemQuestions.handler
