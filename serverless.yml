@@ -18,12 +18,14 @@ provider:
 
 functions:
   getQSEmbeddingURL:
+    role: arn:aws:iam::710349444454:role/service-role/getQSEmbeddingURLRole
     image:
       name: dashboard_service
       command:
-        - getQSEmbeddingURL.handler
+        - getQSEmbeddingURL.lambda_handler
   getEnemQuestions:
+    role: arn:aws:iam::710349444454:role/service-role/getEnemQuestionsRole
     image:
       name: questions_service
       command:
-        - getEnemQuestions.handler
+        - getEnemQuestions.lambda_handler

@@ -3,9 +3,10 @@ import os
 
 def lambda_handler(event, context):
     dynamodb = boto3.client('dynamodb')
+    table = os.environ['TABLE']
 
     response = dynamodb.execute_statement(
-            Statement = 'SELECT object_key, bucket_name, exam_area, page_number, question_num FROM exam_question_files;'
+            Statement = f'SELECT object_key, bucket_name, exam_area, page_number, question_num FROM {table};'
         )
 
     return {

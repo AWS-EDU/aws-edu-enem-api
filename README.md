@@ -15,6 +15,18 @@ We recommend using a version manager, like **pip**.
 5. Create a virtual environmnet with `virtualenv venv`.
 6. Install the dependencies with `pip install -r requirements.txt`.
 
+## :computer: Testing Local
+
+```
+cd services/<SERVICE NAME>
+
+docker build -t <SERVICE NAME>:latest .
+
+docker run -e AWS_ACCESS_KEY_ID=<ACCESS KEY> -e AWS_SECRET_ACCESS_KEY=<SECRET KEY> -e AWS_DEFAULT_REGION=<REGION> -p 9000:8080 <SERVICE NAME>:latest <FUNCTION>.lambda_handler
+
+curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{}'
+```
+
 ## :cloud: Deploying on AWS
 
 ## :lock: Security
