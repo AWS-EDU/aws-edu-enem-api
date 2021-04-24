@@ -23,9 +23,21 @@ functions:
       name: dashboard_service
       command:
         - getQSEmbeddingURL.lambda_handler
+    events:
+      - http:
+          path: quicksight
+          method: get
+          integration: lambda
+          cors: true
   getEnemQuestions:
     role: arn:aws:iam::710349444454:role/service-role/getEnemQuestionsRole
     image:
       name: questions_service
       command:
         - getEnemQuestions.lambda_handler
+    events:
+      - http:
+          path: questions
+          method: get
+          integration: lambda
+          cors: true
