@@ -27,7 +27,6 @@ functions:
       - http:
           path: quicksight
           method: get
-          integration: lambda
           cors: true
   getEnemQuestions:
     role: arn:aws:iam::710349444454:role/service-role/getEnemQuestionsRole
@@ -39,5 +38,15 @@ functions:
       - http:
           path: questions
           method: get
-          integration: lambda
+          cors: true
+  getQuestionURL:
+    role: arn:aws:iam::710349444454:role/EnemS3Role
+    image:
+      name: questions_service
+      command:
+        - getQuestionURL.lambda_handler
+    events:
+      - http:
+          path: question_url
+          method: get
           cors: true

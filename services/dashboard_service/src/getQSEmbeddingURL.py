@@ -1,4 +1,5 @@
 import boto3
+import json
 import os
 
 def lambda_handler(event, context):
@@ -12,5 +13,7 @@ def lambda_handler(event, context):
     
     return {
         'statusCode': 200,
-        'EmbedUrl': response['EmbedUrl']
+        'body': json.dumps({
+            'EmbedUrl': response['EmbedUrl'] 
+        })
     }
