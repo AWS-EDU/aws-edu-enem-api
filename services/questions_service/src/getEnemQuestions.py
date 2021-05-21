@@ -7,7 +7,7 @@ def lambda_handler(event, context):
     table = os.environ['TABLE']
 
     response = dynamodb.execute_statement(
-            Statement = f'SELECT object_key, bucket_name, exam_area, page_number, question_num FROM {table};'
+            Statement = f'SELECT object_key, bucket_name, exam_area, page_number, question_num, color FROM {table};'
         )
 
     return {
