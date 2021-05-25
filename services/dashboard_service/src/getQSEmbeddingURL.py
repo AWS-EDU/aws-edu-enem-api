@@ -4,11 +4,14 @@ import os
 
 def lambda_handler(event, context):
     quicksight = boto3.client('quicksight')
+    dashboard_url = event['queryStringParameters']['dashboard_url']
+    
     response = quicksight.get_dashboard_embed_url(
         AwsAccountId=os.environ['ACCOUNTID'],
-        DashboardId=os.environ['DASHBOARDID'],
+        DashboardId=dashboard_url,
         IdentityType='ANONYMOUS',
-        Namespace='default'
+        Namespace='default',
+        SessionLifetimeInMinutes = 600
     )
     
     return {
